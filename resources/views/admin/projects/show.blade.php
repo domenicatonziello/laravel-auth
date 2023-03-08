@@ -12,7 +12,7 @@
             <a href="{{ $project->link_project}}" class="btn btn-primary">Vedi in GitHub</a>
             <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-warning text-white">Modifica</a>
             <a href="{{route('admin.projects.index')}}" class="btn btn-secondary my-2">Indietro</a>
-            <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="text-end">
+            <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="text-end delete-form">
                 @method('DELETE')
                 @csrf
                 <button type="submit" class="btn btn-danger">Elimina</button>

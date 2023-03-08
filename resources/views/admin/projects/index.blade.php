@@ -19,7 +19,7 @@
                         <p class="card-text"> {{$project->description }}</p>
                         <div class="mt-auto">
                             <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-primary">Dettagli</a>
-                            <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="d-inline">
+                            <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="d-inline delete-form">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Elimina</button>
