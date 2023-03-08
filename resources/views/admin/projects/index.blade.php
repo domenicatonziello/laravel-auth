@@ -5,21 +5,26 @@
 @section ('content')
     <div class="d-flex justify-content-between align-items-center my-5">
         <h1 class="">Progetti</h1>
-        <a href="{{route('admin.projects.create')}}" class="btn btn-warning">Aggiungi</a>
+        <a href="{{route('admin.projects.create')}}" class="btn btn-success">Aggiungi</a>
     </div>
     <div class="row">
         @forelse ($projects as $project)
-            <div class="card m-3 px-0" style="width: 18rem;">
-                <img src="{{ $project->image }}" class="card-img-top img-fluid" alt="{{ $project->title}}">
-                <div class="card-body">
+            <div class="card mx-1 my-3 px-0" style="width: 18rem;">
+                <div class="card-image">
+                    <img src="{{ $project->image }}" class="card-img-top img-fluid" alt="{{ $project->title}}">
+                </div>
+                <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ $project->title }}</h5>
                     <p class="card-text"> {{$project->description }}</p>
-                    <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-primary">Dettagli</a>
-                    <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="d-inline">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Elimina</button>
-                    </form>
+                    <div class="mt-auto">
+                        <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-primary">Dettagli</a>
+                        <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="d-inline">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Elimina</button>
+                        </form>
+                        <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-warning text-white">Modifica</a>
+                    </div>
                 </div>
             </div>
         @empty
