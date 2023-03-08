@@ -9,21 +9,23 @@
     </div>
     <div class="row">
         @forelse ($projects as $project)
-            <div class="card mx-1 my-3 px-0" style="width: 18rem;">
-                <div class="card-image">
-                    <img src="{{ $project->image }}" class="card-img-top img-fluid" alt="{{ $project->title}}">
-                </div>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ $project->title }}</h5>
-                    <p class="card-text"> {{$project->description }}</p>
-                    <div class="mt-auto">
-                        <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-primary">Dettagli</a>
-                        <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="d-inline">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-danger">Elimina</button>
-                        </form>
-                        <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-warning text-white">Modifica</a>
+            <div class="col-4 my-3">
+                <div class="card h-100">
+                    <div class="card-image">
+                        <img src="{{ $project->image }}" class="card-img-top img-fluid" alt="{{ $project->title}}">
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ $project->title }}</h5>
+                        <p class="card-text"> {{$project->description }}</p>
+                        <div class="mt-auto">
+                            <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-primary">Dettagli</a>
+                            <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="d-inline">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Elimina</button>
+                            </form>
+                            <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-warning text-white">Modifica</a>
+                        </div>
                     </div>
                 </div>
             </div>
