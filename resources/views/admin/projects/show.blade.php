@@ -9,8 +9,13 @@
         <div class="card-body">
             <h5 class="card-title">{{ $project->title }}</h5>
             <p class="card-text"> {{$project->description }}</p>
-            <a href="{{ $project->link_project}}" class="btn btn-primary me-2">Vedi in GitHub</a>
-            <a href="{{route('admin.projects.index')}}" class="btn btn-secondary">Indietro</a>
+            <a href="{{ $project->link_project}}" class="btn btn-primary">Vedi in GitHub</a>
+            <a href="{{route('admin.projects.index')}}" class="btn btn-secondary my-2">Indietro</a>
+            <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="text-end">
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="btn btn-danger">Elimina</button>
+            </form>
         </div>
     </div>
 </div>
