@@ -3,7 +3,10 @@
 @section('title', 'Progetti')
 
 @section ('content')
-    <h1 class="my-5">Progetti</h1>
+    <div class="d-flex justify-content-between align-items-center my-5">
+        <h1 class="">Progetti</h1>
+        <a href="{{route('admin.projects.create')}}" class="btn btn-warning">Aggiungi</a>
+    </div>
     <div class="row">
         @forelse ($projects as $project)
             <div class="card m-3 px-0" style="width: 18rem;">
