@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -33,6 +34,15 @@ class ProjectController extends Controller
     {
         $data = $request->all();
         $project = new Project();
+
+        // controllo se nell'array ho l'immagine
+        if (array_key_exists('image', $data)) {
+            // prendo l'url dell'immagine
+            $img_url = Storage::put('projects', $data['image']);
+            // sostituisco url all'immagine
+            $data['image'] = $img_url;
+        }
+
         $project->fill($data);
         $project->save();
 
@@ -61,6 +71,17 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $data = $request->all();
+
+        // controllo se ho già l'immagine e la elimino
+        if ($project->image) Storage::delete($project->image);
+        // controllo se nell'array ho l'immagine
+        if (array_key_exists('image', $data)) {
+            // prendo l'url dell'immagine
+            $img_url = Storage::put('projects', $data['image']);
+            // sostituisco url all'immagine
+            $data['image'] = $img_url;
+        }
+
         $project->update($data);
 
         return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('message', 'Progetto modificato con successo');

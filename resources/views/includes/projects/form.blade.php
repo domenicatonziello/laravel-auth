@@ -1,9 +1,9 @@
 <hr>
 @if($project->exists)
-    <form action="{{route('admin.projects.update', $project->id)}}" method="POST">
+    <form action="{{route('admin.projects.update', $project->id)}}" method="POST" enctype="multipart/form-data">
     @method('PUT')
 @else
-    <form action="{{route('admin.projects.store')}}" method="POST">
+    <form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
 @endif
     @csrf
     <div class="row my-5">
@@ -15,7 +15,7 @@
         {{-- image --}}
         <div class="col-6 mb-4">
             <label for="image" class="form-label">Immagine</label>
-            <input type="url" class="form-control" id="image" name="image" value="{{$project->image}}" placeholder="Inserisci URL dell'immagine">
+            <input type="file" class="form-control" id="image" name="image">
         </div>
         {{-- description --}}
         <div class="col-8 mb-4">

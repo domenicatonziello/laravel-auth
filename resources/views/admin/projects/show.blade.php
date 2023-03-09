@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-center my-5">
     <div class="card m-3 px-0" style="width: 70%;">
-        <img src="{{ $project->image }}" class="card-img-top img-fluid" alt="{{ $project->title}}">
+        <img src="{{ asset('storage/'. $project->image) }}" class="card-img-top img-fluid" alt="{{ $project->title}}">
         <div class="card-body">
             <h5 class="card-title">{{ $project->title }}</h5>
             <p class="card-text"> {{$project->description }}</p>
