@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
 {
@@ -32,6 +33,18 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string|unique:projects|max:50',
+            'description' => 'string|nullable',
+            'image' => 'image|nullable',
+            'link_project' => 'required|string|unique:projects'
+        ], [
+            'title.required' => 'il titolo è obbligatorio',
+            'title.max' => 'il titolo deve avere massimo 50 caratteri',
+            'title.unique' => "Esiste già un progetto $request->title ",
+            'link_project.required' => 'Il link per il progetto è obbligatorio',
+            'link_project.unique' => 'Link già esistente'
+        ]);
         $data = $request->all();
         $project = new Project();
 
@@ -70,6 +83,18 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        $request->validate([
+            'title' => ['required', 'string', Rule::unique('projects')->ignore($project->id), 'max:50'],
+            'description' => 'string|nullable',
+            'image' => 'image|nullable',
+            'link_project' => ['required', 'string', Rule::unique('projects')->ignore($project->id)]
+        ], [
+            'title.required' => 'il titolo è obbligatorio',
+            'title.max' => 'il titolo deve avere massimo 50 caratteri',
+            'title.unique' => "Esiste già un progetto $request->title ",
+            'link_project.required' => 'Il link per il progetto è obbligatorio',
+            'link_project.unique' => 'Link già esistente'
+        ]);
         $data = $request->all();
 
         // controllo se ho già l'immagine e la elimino

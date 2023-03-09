@@ -1,16 +1,19 @@
 <hr>
 @if($project->exists)
-    <form action="{{route('admin.projects.update', $project->id)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('admin.projects.update', $project->id)}}" method="POST" novalidate enctype="multipart/form-data">
     @method('PUT')
 @else
-    <form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('admin.projects.store')}}" method="POST" novalidate enctype="multipart/form-data">
 @endif
     @csrf
     <div class="row my-5">
         {{-- title --}}
         <div class="col-6 mb-4">
             <label for="title" class="form-label">Titolo</label>
-            <input type="text" class="form-control" id="title" name="title" maxlength="50" required value="{{$project->title}}" placeholder="Inserisci il titolo del tuo progetto">
+            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" maxlength="50" required value="{{ old('title', $project->title) }}" placeholder="Inserisci il titolo del tuo progetto">
+            @error('title')
+                <div class="invalid-feedback"> {{$message}} </div>
+            @enderror
         </div>
         {{-- image --}}
         <div class="col-6 mb-4">
@@ -20,12 +23,18 @@
         {{-- description --}}
         <div class="col-8 mb-4">
             <label for="description" class="form-label">Descrizione</label>
-            <textarea class="form-control" id="description" name="description" rows="3"> {{$project->description}}</textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3"> {{ old('description', $project->description) }}</textarea>
+            @error('description')
+                <div class="invalid-feedback"> {{$message}} </div>
+            @enderror
         </div>
         {{-- link_project --}}
         <div class="col-4 mb-4">
             <label for="link" class="form-label">Link Progetto</label>
-            <input type="text" class="form-control" id="link" name="link_project" required  value="{{$project->link_project}}" placeholder="Inserisci link del progetto">
+            <input type="text" class="form-control @error('link_project') is-invalid @enderror" id="link" name="link_project" required  value="{{ old('link_project', $project->link_project) }}" placeholder="Inserisci link del progetto">
+            @error('link_project')
+                <div class="invalid-feedback"> {{$message}} </div>
+            @enderror
         </div>
     </div>
     <a href="{{route('admin.projects.index')}}" class="btn btn-secondary">Indietro</a>
