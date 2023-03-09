@@ -16,9 +16,12 @@
             @enderror
         </div>
         {{-- image --}}
-        <div class="col-6 mb-4">
+        <div class="col-4 mb-4">
             <label for="image" class="form-label">Immagine</label>
             <input type="file" class="form-control" id="image" name="image">
+        </div>
+        <div class="col-2 mb-4">
+            <img class="img-fluid" id="preview" src="{{ $project->image ? asset('storage/'. $project->image) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToAJWzwYiDV9a5AvKOyHpeBXgjj-K_8i_WnVmIQSBmJAYa2NATl--M6dAVolBJibkV0do&usqp=CAU' }}" alt="">
         </div>
         {{-- description --}}
         <div class="col-8 mb-4">
@@ -41,3 +44,6 @@
     <button type="submit" class="btn btn-primary">Salva</button>
 </form>
 <hr>
+@section('scripts')
+<script src="{{ Vite::asset('resources/js/preview-image.js')}}"></script>
+@endsection
