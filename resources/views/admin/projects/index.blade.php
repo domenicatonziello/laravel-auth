@@ -12,7 +12,7 @@
             <div class="col-4 my-3">
                 <div class="card h-100">
                     <div class="card-image">
-                        <img src="{{ $project->image }}" class="card-img-top img-fluid" alt="{{ $project->title}}">
+                        <img src="{{ asset('storage/'. $project->image) }}" class="card-img-top img-fluid" alt="{{ $project->title}}">
                     </div>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ $project->title }}</h5>
