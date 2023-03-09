@@ -29,7 +29,10 @@
 
         {{-- main --}}
         <main class="container">
-            @include('includes.alert')
+            @include('includes.alert.session')
+            @auth    
+                @include('includes.alert.errors')
+            @endauth
             @yield('content')
         </main>
     </div>
